@@ -4,7 +4,7 @@
   "description": "",
   "main": "15-03.ts",
   "scripts": {
-    "start": "ts-node 15-03.ts"
+    "start": "ts-node 15-03/blackJack.ts"
   },
   "repository": {
     "type": "git",

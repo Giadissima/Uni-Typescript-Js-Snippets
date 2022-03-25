@@ -46,8 +46,13 @@ class BlackJack {
     } else{
       if (cartaGiocatore[1] == NomeCarta.Asso) this.puntiGiocatore += 10
       else this.puntiGiocatore += cartaGiocatore[1]
+      console.log(`punti giocatore: ${this.puntiGiocatore}, carta uscita: ${NomeCarta[cartaGiocatore[1]]} di ${Seme[cartaGiocatore[0]]}`);
+      
     }
-    if(this._finita || this.puntiGiocatore > this.MAX_PUNTI_GIOCATORE) return false;
+    if(this._finita || this.puntiGiocatore > this.MAX_PUNTI_GIOCATORE) {
+      this._finita = true
+      return false
+    }
     return true;
   }
   
@@ -57,7 +62,7 @@ class BlackJack {
   public concludi() {
     if(this._finita) throw new Error("La partita è già finita!")
     let cartaEstratta = this._mazzo.pesca()
-    while(cartaEstratta != undefined || (this._puntiBanco + cartaEstratta![1]) > this.MAX_PUNTI_BANCO){
+    while(cartaEstratta != undefined && (this._puntiBanco + cartaEstratta![1]) < this.MAX_PUNTI_BANCO){
       this._puntiBanco += cartaEstratta![1]
       cartaEstratta = this._mazzo.pesca()
     }
@@ -87,21 +92,23 @@ class Mazzo{
   private _giocabile: Carta[] = [];
   constructor(){
     this.reset()
+    this.mescola()
   }
 
   // mescola il mazzo
   public mescola(){
-    this.giocabile = (shuffle(this._giocabile))
+    this._giocabile = shuffle<Carta>(this._giocabile)
   }
 
   // pesca una carta
-  public pesca = ()=>this.giocabile.pop()
+  public pesca = ()=>this._giocabile.pop()
 
   // resetta il mazzo
   public reset(){
-    for (let seme = 0; seme < Object.keys(Seme).length; seme++) {
-      for(let nome= 0; nome < Object.keys(NomeCarta).length; nome++){
-        this._giocabile.push([seme, nome])
+    this._giocabile = []
+    for (let seme = 0; seme < Object.keys(Seme).length / 2; seme++) {
+      for(let nome= 0; nome < Object.keys(NomeCarta).length / 2; nome++){
+        this._giocabile.push([seme, nome])        
       }
     }
   }
@@ -117,6 +124,27 @@ class Mazzo{
 }
 
 // funzione che permette di mercolare un array
-function shuffle<T>(array: T[]) {
-  return array.sort(() => Math.random() - 0.5);
+function shuffle<T>(array: T[]): T[] {
+  let currentIndex = array.length,  randomIndex;
+
+  // While there remain elements to shuffle...
+  while (currentIndex != 0) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    // And swap it with the current element.
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex], array[currentIndex]];
+  }
+
+  return array;
 }
+
+// inizia una partita
+let p1 = new BlackJack();
+console.log(p1.pesca(), p1.pesca(), p1.concludi());
+
+let p2 = new BlackJack();
+console.log(p1.pesca(), p1.concludi());
