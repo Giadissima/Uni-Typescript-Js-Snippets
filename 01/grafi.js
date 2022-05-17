@@ -34,3 +34,5 @@ function nodoGradoMassimo(G){
 }
 
 console.log(nodoGradoMassimo(G));
+console.clear()
+console.warn("warning")
