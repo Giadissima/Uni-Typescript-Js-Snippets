@@ -24,7 +24,7 @@ class CodaLimitata{
 
   dequeue(){ return this.arr.shift()}
   peek(){ if(this.arr.length > 0) return this.arr[0]
-          return []}
+          return undefined}
   len(){ return this.arr.length}
 }
 
