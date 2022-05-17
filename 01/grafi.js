@@ -20,7 +20,7 @@ function nodoGradoMassimo(G){
   let nodo_max;
   let grado_max = 0;
   for (let n of G.nodi){
-    let current_grade = 0;/
+    let current_grade = 0;
     for(let e of G.archi){
       if(e.da == n) current_grade ++;
       if(e.a == n) current_grade ++;
