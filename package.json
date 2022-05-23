@@ -5,7 +5,7 @@
   "main": "15-03.ts",
   "scripts": {
     "start": "ts-node 15-03/blackJack.ts",
-    "debug": "ts-node 03/08/albero_binario.ts"
+    "debug": "ts-node 05/es3compito.ts"
   },
   "repository": {
     "type": "git",
