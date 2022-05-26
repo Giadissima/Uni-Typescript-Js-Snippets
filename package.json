@@ -4,8 +4,7 @@
   "description": "",
   "main": "15-03.ts",
   "scripts": {
-    "start": "ts-node 15-03/blackJack.ts",
-    "debug": "ts-node 05/es3compito.ts"
+    "start": "ts-node compito/albero.js"
   },
   "repository": {
     "type": "git",
