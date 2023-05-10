@@ -1,7 +1,6 @@
 enum Risposta{
   sì,
   no
-  
 }
 
 let risposteDiMatteo: Risposta[] = [Risposta.sì, Risposta.sì]
